@@ -7,7 +7,7 @@
   {%- endif %}
 
   {%- if data.photos.size > 0 %}
-  <div class="gallery">
+  <div class="gallery" data-autoplay="{{ data.autoplay | default: false }}" data-speed="{{ data.autoplay_speed | default: 30 }}">
     <ul class="gallery-track" aria-label="Photo gallery" tabindex="0">
       {%- for photo in data.photos %}
       <li><figure>
@@ -17,6 +17,7 @@
       {%- endfor %}
     </ul>
     <div class="gallery-nav" hidden>
+      <button class="text-btn gallery-pause" type="button" hidden>Pause</button>
       <button class="text-btn" type="button" data-dir="-1" aria-label="Previous photos">←</button>
       <button class="text-btn" type="button" data-dir="1" aria-label="Next photos">→</button>
     </div>

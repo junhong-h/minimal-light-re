@@ -41,8 +41,16 @@ $gallery-h: 220px;
   .text-btn { font-size: 1.1rem; line-height: 1; padding: 6px 10px; color: var(--ink); }
   .text-btn:hover { color: var(--accent); text-decoration: none; }
   .text-btn:disabled { color: var(--line); cursor: default; }
+  .gallery-pause { font-size: 0.85rem; margin-right: auto; color: var(--muted); }
 }
-@media (hover: none) { .gallery-nav { display: none; } }   // 触屏直接滑动
+@media (hover: none) { .gallery-nav [data-dir] { display: none; } }   // 触屏直接滑动，只保留 Pause
+
+// 自动循环时：关闭吸附（否则会和逐帧滚动互相拉扯），两侧始终渐隐
+.gallery.looping .gallery-track {
+  scroll-snap-type: none; scroll-behavior: auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+          mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+}
 
 @media (prefers-reduced-motion: reduce) { .gallery-track { scroll-behavior: auto; } }
 

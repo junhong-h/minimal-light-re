@@ -6,12 +6,18 @@
 #         caption  照片下方的一行小字，几个词或一句话
 #         alt      可选：给读屏软件的图片描述；不填则使用 caption
 #
+# autoplay        相册是否自动缓慢循环滚动（悬停、滑动、聚焦时暂停，访问者也可点 Pause 停止）
+# autoplay_speed  自动滚动速度，单位 px/秒，建议 20–40
+#
 # 下面的 sample-*.jpg 是占位图，换成真实照片后可以删除。
 
 text: |
   When I'm not in the lab, you'll probably find me somewhere with a camera — mostly 35mm film and quiet street corners. I'm also slowly training for my first half marathon, and rereading *The Design of Everyday Things* for the third time.
 
   Happy to chat about research, grad school, or film cameras — just [email me](mailto:yourname@example.edu).
+
+autoplay: true
+autoplay_speed: 30
 
 photos:
   - image: /assets/img/beyond/sample-1.jpg

@@ -188,27 +188,105 @@
     }, 1500);
   }));
 
-  /* ---------- 相册：左右翻页按钮、边缘渐隐 ---------- */
+  /* ---------- 相册：左右翻页、边缘渐隐、可选的自动循环滚动 ---------- */
   $$('.gallery').forEach(g => {
     const track = $('.gallery-track', g);
     const nav = $('.gallery-nav', g);
-    const [prev, next] = $$('button', nav);
+    const pauseBtn = $('.gallery-pause', g);
+    const prev = $('[data-dir="-1"]', nav), next = $('[data-dir="1"]', nav);
+    const originals = $$('li', track);
+    const speed = parseFloat(g.dataset.speed) || 30;          // px/秒
+    let looping = false, setWidth = 0;
+
+    const overflowing = () => track.scrollWidth - track.clientWidth > 2;
     const update = () => {
+      nav.hidden = !looping && !overflowing();                 // 照片不多、不需要滚动时隐藏按钮
+      if (looping) { prev.disabled = next.disabled = false; return; }
       const max = track.scrollWidth - track.clientWidth;
       const left = track.scrollLeft > 2, right = track.scrollLeft < max - 2;
       track.classList.toggle('more-left', left);
       track.classList.toggle('more-right', right);
-      nav.hidden = max <= 2;                       // 照片不多、不需要滚动时隐藏按钮
       prev.disabled = !left; next.disabled = !right;
     };
-    $$('button', nav).forEach(b => b.addEventListener('click', () => {
-      track.scrollBy({ left: Number(b.dataset.dir) * track.clientWidth * 0.8, behavior: reduceMotion() ? 'auto' : 'smooth' });
-      setTimeout(update, 450);                     // 兜底：滚动结束后再刷新一次按钮状态
+
+    // 无缝循环：在末尾复制一份照片；滚过第一份的宽度时悄悄跳回开头
+    const measure = () => { if (looping) setWidth = $('li.clone', track).offsetLeft - originals[0].offsetLeft; };
+    const wrap = () => {
+      if (looping && setWidth > 0 && track.scrollLeft >= setWidth) track.scrollLeft -= setWidth;
+    };
+
+    // 暂停条件：任意一项成立即暂停
+    const paused = { hover: false, focus: false, touch: false, offscreen: false, user: false };
+    let resumeAt = 0;                                           // 用户手动操作后，暂停到此时间
+    const holdOff = () => { resumeAt = performance.now() + 4000; };
+    const lb = $('.lightbox');
+    const running = () => looping && !document.hidden && !(lb && lb.open)
+      && !Object.values(paused).some(Boolean) && performance.now() >= resumeAt;
+
+    let pos = 0, last = null;
+    const tick = t => {
+      if (last !== null && running()) {
+        pos += speed * (t - last) / 1000;
+        if (pos >= setWidth) pos -= setWidth;
+        track.scrollLeft = pos;
+      } else {
+        pos = track.scrollLeft;                                 // 暂停期间跟随用户的手动滚动
+      }
+      last = t;
+      requestAnimationFrame(tick);
+    };
+
+    const startLoop = () => {
+      if (looping || g.dataset.autoplay !== 'true' || reduceMotion() || !overflowing()) return;
+      originals.forEach(li => {
+        const c = li.cloneNode(true);
+        c.classList.add('clone');
+        c.setAttribute('aria-hidden', 'true');                 // 复制品对读屏和键盘隐藏
+        $$('img', c).forEach(img => { img.alt = ''; img.loading = 'eager'; });
+        track.appendChild(c);
+      });
+      looping = true;
+      g.classList.add('looping');
+      pauseBtn.hidden = false;
+      measure(); update();
+      requestAnimationFrame(tick);
+    };
+
+    // 翻页按钮：循环模式下向左越过开头时，先跳到复制品的对应位置再滚动
+    [prev, next].forEach(b => b.addEventListener('click', () => {
+      const dx = Number(b.dataset.dir) * track.clientWidth * 0.8;
+      if (looping && dx < 0 && track.scrollLeft + dx < 0) track.scrollLeft += setWidth;
+      holdOff();
+      track.scrollBy({ left: dx, behavior: reduceMotion() ? 'auto' : 'smooth' });
+      setTimeout(update, 450);
     }));
-    track.addEventListener('scroll', update, { passive: true });
+
+    pauseBtn.addEventListener('click', () => {
+      paused.user = !paused.user;
+      pauseBtn.textContent = paused.user ? 'Play' : 'Pause';
+      pauseBtn.setAttribute('aria-label', paused.user ? 'Resume photo slideshow' : 'Pause photo slideshow');
+    });
+    pauseBtn.setAttribute('aria-label', 'Pause photo slideshow');
+
+    g.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') paused.hover = true; });
+    g.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') paused.hover = false; });
+    g.addEventListener('focusin', () => { paused.focus = !!$(':focus-visible', g); });
+    g.addEventListener('focusout', () => { paused.focus = false; });
+    track.addEventListener('touchstart', () => { paused.touch = true; }, { passive: true });
+    track.addEventListener('touchend', () => { paused.touch = false; holdOff(); }, { passive: true });
+    track.addEventListener('wheel', holdOff, { passive: true });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([e]) => { paused.offscreen = !e.isIntersecting; }).observe(g);
+    }
+
+    track.addEventListener('scroll', () => { wrap(); update(); }, { passive: true });
     track.addEventListener('scrollend', update);
-    addEventListener('resize', update);
-    $$('img', track).forEach(img => img.complete || img.addEventListener('load', update));
+    addEventListener('resize', () => { measure(); update(); });
+
+    // 等照片加载完、知道总宽度后，再决定是否需要滚动 / 自动循环
+    Promise.all($$('img', track).map(img => img.complete ? null :
+      new Promise(r => { img.addEventListener('load', r, { once: true }); img.addEventListener('error', r, { once: true }); })))
+      .then(() => { update(); startLoop(); });
     update();
   });
 
@@ -226,12 +304,20 @@
       const fc = img.closest('figure') && $('figcaption', img.closest('figure'));
       caption.textContent = fc ? fc.textContent : '';
     };
-    $$('.thumb img, .gallery-track img').forEach(img => img.addEventListener('click', () => {
+    // 用事件委托：相册循环时动态加入的复制品也能点击
+    document.addEventListener('click', e => {
+      const img = e.target.closest('.thumb img, .gallery-track img');
+      if (!img) return;
       const track = img.closest('.gallery-track');
-      group = track ? $$('img', track) : [img];
-      show(group.indexOf(img));
+      if (track) {
+        group = $$('li:not(.clone) img', track);
+        const all = $$('img', track);
+        show(all.indexOf(img) % group.length);                // 复制品对应回原始照片
+      } else {
+        group = [img]; show(0);
+      }
       lightbox.showModal();
-    }));
+    });
     lightbox.addEventListener('click', () => lightbox.close());
     lightbox.addEventListener('keydown', e => {
       if (group.length < 2) return;
