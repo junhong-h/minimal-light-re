@@ -1,0 +1,75 @@
+// =============================================================
+// 页面布局：左侧固定侧边栏 + 右侧正文，及响应式断点
+// =============================================================
+
+$breakpoint-tablet: 960px;
+$breakpoint-mobile: 480px;
+
+.wrapper {
+  width: 960px;
+  margin: 0 auto;
+}
+
+// 左侧：个人信息（_includes/profile.html）
+.sidebar {
+  width: 232px;
+  float: left;
+  position: fixed;
+  padding-top: 4em;
+  text-align: center;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+// 右侧：正文（index.md）
+.content {
+  width: 650px;
+  float: right;
+  padding-top: 4em;
+  padding-bottom: 50px;
+}
+
+.footnote {
+  padding-top: $font-size * 1.5;
+
+  small { font-size: 11px; }
+}
+
+// ---------- 平板及以下：单栏 ----------
+@media print, screen and (max-width: $breakpoint-tablet) {
+  body {
+    padding: 15px;
+    word-wrap: break-word;
+  }
+
+  .wrapper {
+    width: auto;
+    margin: 0;
+  }
+
+  .sidebar,
+  .content {
+    float: none;
+    position: static;
+    width: auto;
+  }
+
+  .sidebar { padding: 0; }
+
+  .content {
+    border: 1px solid var(--color-border);
+    border-width: 1px 0;
+    padding: 20px 0;
+    margin: 0 0 20px;
+  }
+
+  pre, code { word-wrap: normal; }
+}
+
+// ---------- 打印 ----------
+@media print {
+  body {
+    padding: 0.4in;
+    font-size: 12pt;
+    color: #444;
+  }
+}

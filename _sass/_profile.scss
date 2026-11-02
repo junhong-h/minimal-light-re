@@ -1,0 +1,60 @@
+// =============================================================
+// 侧边栏个人信息：头像、姓名、职位、邮箱、社交图标
+// =============================================================
+
+.avatar {
+  display: inline-block;
+  position: relative;
+  border-radius: 100%;
+
+  img {
+    width: 45%;
+    padding: 20px;
+    border-radius: 100%;
+  }
+}
+
+.profile-position { font-size: 1.1rem; }
+
+.profile-affiliation { color: var(--color-text); }
+
+.profile-email {
+  font-size: 14px;
+  font-family: "Ubuntu Mono", monospace;
+  line-height: $font-size * 1.5; // 与正文行高对齐
+}
+
+.social-icons {
+  margin: 1.5em 0;
+
+  a {
+    display: inline-block;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 5px;
+    border-radius: 100%;
+    background-color: transparent;
+    color: var(--color-icon);
+    font-size: 1.15rem;
+    line-height: 2.5rem;
+    text-align: center;
+
+    &:last-child { margin-right: 0; }
+
+    &:hover {
+      background-color: var(--color-icon-hover-bg);
+      transform: scale(1.2);
+    }
+  }
+
+  .icon-scholar { font-size: 1.2rem; }
+  .icon-cv      { font-size: 1.3rem; }
+}
+
+@media print, screen and (max-width: $breakpoint-tablet) {
+  .avatar img { width: 117px; }
+}
+
+@media print, screen and (max-width: $breakpoint-mobile) {
+  .avatar img { width: 95px; }
+}

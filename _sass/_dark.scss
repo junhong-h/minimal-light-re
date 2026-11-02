@@ -1,0 +1,24 @@
+// =============================================================
+// 深色模式
+// 仅在 _config.yml 中 auto_dark_mode: true 时引入，
+// 跟随系统设置（prefers-color-scheme）自动切换。
+// TODO: 后续重新设计深色配色时，主要修改这里的变量即可。
+// =============================================================
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:            #20212b;
+    --color-text:          #dadbdf;
+    --color-strong:        #eeeff0;
+    --color-label:         #3eb7f0;
+
+    --color-heading:       #3eb7f0;
+    --color-link:          #3eb7f0;
+
+    --color-icon:          #3eb7f0;
+    --color-icon-hover-bg: #20212b;
+
+    --color-theme:         rgb(36, 150, 203);
+    --color-btn:           #fff;
+  }
+}

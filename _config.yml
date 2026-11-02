@@ -1,57 +1,50 @@
-# Basic Information 
+# =============================================================
+# 站点配置
+# 修改本文件后，本地需要重启 `bundle exec jekyll serve` 才会生效。
+# =============================================================
+
+# ---------- 基本信息 ----------
 title: Your Name
 position: Ph.D. Student
 affiliation: Your Affiliation
+affiliation_link:            # 可选：单位主页链接
 email: yourname (at) example.edu
 
-# Search Engine Optimization (SEO)
-# The following information is used to improve the website traffic from search engines, e.g., Google.
+# ---------- 站点地址 ----------
+# 部署到 https://<username>.github.io 时，url 填该地址，baseurl 留空
+url: https://junhong-h.github.io
+baseurl: ""
+
+# ---------- SEO ----------
 keywords: minimal light
 description: The Minimal Light is a simple and elegant jekyll theme for academic personal homepage.
-canonical: https://minimal-light-theme.yliu.me/
 
-# Links 
-# If you don't need one of them, you may delete the corresponding line.
+# ---------- 社交链接（不需要的项直接删除）----------
 google_scholar: https://scholar.google.com/
-cv_link: assets/files/curriculum_vitae.pdf
+cv_link: /assets/files/curriculum_vitae.pdf
 github_link: https://github.com/
 linkedin: https://www.linkedin.com/
 twitter: https://twitter.com/
 
-# Images (e.g., your profile picture and your website's favicon) 
-# "favicon" and "favicon_dark" are used for the light and dark modes, respectively. 
-avatar: ./assets/img/avatar.png
-favicon: ./assets/img/favicon.png
-favicon_dark: ./assets/img/favicon-dark.png
+# ---------- 图片 ----------
+avatar: /assets/img/avatar.png
+favicon: /assets/img/favicon.png            # 浅色模式
+favicon_dark: /assets/img/favicon-dark.png  # 深色模式
 
-# Footnote
-# You may use the option to disable the footnote, "Powered by Jekyll and Minimal Light theme."
-enable_footnote: true
+# ---------- 外观 ----------
+font: "Serif"           # "Serif" 或 "Sans Serif"
+auto_dark_mode: true    # 跟随系统自动切换深色模式
+enable_footnote: true   # 页脚 "Powered by Jekyll and Minimal Light theme."
 
-# Auto Dark Mode
-# You may use the option to disable the automatic dark theme
-auto_dark_mode: true
+# ---------- 统计（可选）----------
+# Google Analytics 4 的测量 ID，形如 G-XXXXXXXXXX；不用则保持注释
+# google_analytics: G-XXXXXXXXXX
 
-# Font
-# You can use this option to choose between Serif or Sans Serif fonts.
-font: "Serif" # or "Sans Serif"
-
-# Google Analytics ID
-# Please remove this if you don't use Google Analytics
-google_analytics: UA-111540567-4
-
-# Use this project as a remote theme for GitHub Pages
-# See the guide here: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
-remote_theme: yaoyao-liu/minimal-light
-
-# The following files will be removed from the generated website.
+# ---------- 构建 ----------
+theme: null   # 不使用 GitHub Pages 默认主题（jekyll-theme-primer）
 exclude:
   - Gemfile
   - Gemfile.lock
   - README.md
-  - README_zh_Hans.md
-  - README_zh_Hant.md
-  - README_de.md
   - LICENSE
-  - minimal-light.gemspec
-  - html_source_file/
+  - vendor/
