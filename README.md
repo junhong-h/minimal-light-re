@@ -11,7 +11,7 @@
 | News | `_data/news.yml` |
 | 论文（含配图、主题筛选、BibTeX） | `_data/publications.yml`，配图放 `assets/img/` |
 | 学术服务 / 教学 | `_data/services.yml` |
-| Beyond Research（爱好、照片） | `_data/beyond.yml` |
+| Beyond Research（一段话 + 横向滚动相册） | `_data/beyond.yml`，照片放 `assets/img/beyond/` |
 | 头像、CV | `assets/img/avatar.png`、`assets/files/curriculum_vitae.pdf` |
 
 每个数据文件开头都有字段说明。页面上显示的文字一律使用英文。

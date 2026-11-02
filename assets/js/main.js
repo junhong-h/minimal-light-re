@@ -188,15 +188,55 @@
     }, 1500);
   }));
 
-  /* ---------- 配图 / 照片：点击全屏查看 ---------- */
+  /* ---------- 相册：左右翻页按钮、边缘渐隐 ---------- */
+  $$('.gallery').forEach(g => {
+    const track = $('.gallery-track', g);
+    const nav = $('.gallery-nav', g);
+    const [prev, next] = $$('button', nav);
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      const left = track.scrollLeft > 2, right = track.scrollLeft < max - 2;
+      track.classList.toggle('more-left', left);
+      track.classList.toggle('more-right', right);
+      nav.hidden = max <= 2;                       // 照片不多、不需要滚动时隐藏按钮
+      prev.disabled = !left; next.disabled = !right;
+    };
+    $$('button', nav).forEach(b => b.addEventListener('click', () => {
+      track.scrollBy({ left: Number(b.dataset.dir) * track.clientWidth * 0.8, behavior: reduceMotion() ? 'auto' : 'smooth' });
+      setTimeout(update, 450);                     // 兜底：滚动结束后再刷新一次按钮状态
+    }));
+    track.addEventListener('scroll', update, { passive: true });
+    track.addEventListener('scrollend', update);
+    addEventListener('resize', update);
+    $$('img', track).forEach(img => img.complete || img.addEventListener('load', update));
+    update();
+  });
+
+  /* ---------- 配图 / 照片：点击全屏查看；相册内可用 ← → 切换 ---------- */
   const lightbox = $('.lightbox');
   if (lightbox && lightbox.showModal) {
     const big = $('img', lightbox);
-    $$('.thumb img, .photos img').forEach(img => img.addEventListener('click', () => {
+    const caption = $('.lb-caption', lightbox);
+    let group = [], index = 0;
+    const show = i => {
+      index = (i + group.length) % group.length;
+      const img = group[index];
       big.src = img.currentSrc || img.src;
       big.alt = img.alt;
+      const fc = img.closest('figure') && $('figcaption', img.closest('figure'));
+      caption.textContent = fc ? fc.textContent : '';
+    };
+    $$('.thumb img, .gallery-track img').forEach(img => img.addEventListener('click', () => {
+      const track = img.closest('.gallery-track');
+      group = track ? $$('img', track) : [img];
+      show(group.indexOf(img));
       lightbox.showModal();
     }));
     lightbox.addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('keydown', e => {
+      if (group.length < 2) return;
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); show(index - 1); }
+    });
   }
 })();

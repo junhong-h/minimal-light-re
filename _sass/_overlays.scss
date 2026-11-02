@@ -9,8 +9,11 @@ dialog.lightbox {
   display: none; place-items: center;
   &[open] { display: grid; }
   &::backdrop { background: rgba(0, 0, 0, 0.86); }
-  img { max-width: 94vw; max-height: 88vh; object-fit: contain; background: #fff; }
-  p { position: absolute; bottom: 16px; left: 0; right: 0; margin: 0; text-align: center; color: #ccc; font-size: 0.85rem; }
+  figure { margin: 0; display: flex; flex-direction: column; align-items: center; }
+  img { max-width: 94vw; max-height: 82vh; object-fit: contain; background: #fff; }
+  .lb-caption { margin-top: 12px; color: #eee; font-size: 0.95rem; text-align: center; }
+  .lb-caption:empty { display: none; }
+  .lb-hint { position: absolute; bottom: 14px; left: 0; right: 0; margin: 0; text-align: center; color: #999; font-size: 0.8rem; }
 }
 
 // ---------- 拉绳开关 ----------
