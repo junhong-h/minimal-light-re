@@ -1,19 +1,21 @@
 // =============================================================
-// 深色模式
+// 深色模式（偏蓝的深海色）
 // 默认跟随系统；访问者用右上角拉绳手动切换后，
 // <html data-theme="light|dark"> 会覆盖系统设置。
 // =============================================================
 
 @mixin dark-tokens {
-  --bg:       #141518;
-  --ink:      #e6e7ea;
-  --muted:    #a2a7b0;
-  --faint:    #7a7f88;
-  --line:     #2b2d32;
-  --accent:   #8fb0ff;
-  --heading:  #6fb6f2;
-  --note:     #ff9479;
-  --code-bg:  #1c1d21;
+  --bg:       #0f1623;
+  --ink:      #e4e8ee;
+  --muted:    #a3adbb;
+  --faint:    #74808f;
+  --line:     #243042;
+
+  --accent:      #7fb2ff;
+  --accent-ink:  #a9caff;
+  --tint:        #17223a;
+  --note:        #ff9479;
+  --code-bg:     #172030;
 }
 
 @media (prefers-color-scheme: dark) {

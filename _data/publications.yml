@@ -8,19 +8,26 @@
 #   venue_short  会议简称，显示在标题上方，例如 "CHI 2026"
 #   venue        完整会议 / 期刊名，斜体显示
 #   award        可选：奖项，红色显示在会议简称后面
+#   highlight    可选：true 表示代表作，放在浅蓝底块中突出显示
+#   summary      可选：一句话简介，说明这篇论文做了什么
 #   image        可选：配图（建议 16:10）；不填则该条论文通栏显示
 #   topics       可选：所属主题，需与上方 topics 中的写法一致
 #   url          可选：标题链接；不填则使用 links 中的第一个链接
-#   links        链接按钮，按顺序显示
+#   links        链接，按顺序显示；名字为 PDF / Paper / Project / Code / Video / Slides / Data 时自动配图标
 #   bibtex       可选：BibTeX 原文；填写后会出现 "BibTeX" 按钮，点击即复制
+
+# 显示在 Publications 标题下方的说明；不需要时删除
+note: "* Equal contribution  † Corresponding author"
 
 topics: [Human–AI, Visualization, Accessibility]
 
 papers:
   - title: "Making Sense Together: How Analysts Collaborate with LLM Agents in Exploratory Data Work"
-    authors: Your Name, Coauthor One, Coauthor Two, Advisor Name
+    authors: Your Name*, Coauthor One*, Coauthor Two, Advisor Name†
     venue_short: CHI 2026
     venue: Proceedings of the CHI Conference on Human Factors in Computing Systems
+    highlight: true
+    summary: A mixed-methods study of how analysts delegate, verify, and repair work when exploring data together with LLM agents.
     image: /assets/img/teaser_example_2.png
     topics: [Human–AI]
     links:
@@ -40,6 +47,8 @@ papers:
     venue_short: UIST 2025
     venue: ACM Symposium on User Interface Software and Technology
     award: Best Paper Honorable Mention
+    highlight: true
+    summary: A sketch-based system that turns hand-drawn charts into editable, data-bound visualizations.
     image: /assets/img/teaser_example.png
     topics: [Visualization]
     links:
@@ -57,6 +66,7 @@ papers:
     authors: Your Name, Coauthor Three
     venue_short: ASSETS 2025
     venue: ACM SIGACCESS Conference on Computers and Accessibility
+    summary: Design guidelines for sonified charts, derived from a study with 18 blind and low-vision participants.
     topics: [Accessibility]
     links:
       - { name: PDF, url: "#" }

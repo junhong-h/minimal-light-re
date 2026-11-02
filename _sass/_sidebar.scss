@@ -2,10 +2,10 @@
 // 侧栏：个人信息 + 章节导航（竖线 + 圆点）
 // =============================================================
 
-.avatar { width: 112px; height: 112px; object-fit: cover; background: var(--code-bg); }
-.name { color: var(--heading); font-size: 1.45rem; letter-spacing: -0.01em; margin: 18px 0 6px; }
+.avatar { width: 192px; height: 192px; object-fit: cover; background: var(--code-bg); }
+.name { font-family: var(--font-display); font-weight: 600; color: var(--ink); font-size: 1.75rem; letter-spacing: -0.01em; line-height: 1.2; margin: 22px 0 8px; }
 .role {
-  margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.55;
+  margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.55;
   a { color: inherit; }
   a:hover { color: var(--ink); }
 }
@@ -28,19 +28,19 @@
     transition: background .2s, border-color .2s, transform .2s;
   }
   &:hover { color: var(--ink); text-decoration: none; }
-  &:hover::before { border-color: var(--heading); }
-  &[aria-current="true"] { color: var(--heading); }
-  &[aria-current="true"]::before { background: var(--heading); border-color: var(--heading); transform: scale(1.15); }
+  &:hover::before { border-color: var(--accent); }
+  &[aria-current="true"] { color: var(--accent); }
+  &[aria-current="true"]::before { background: var(--accent); border-color: var(--accent); transform: scale(1.15); }
 }
 
 // ---------- 平板及手机：紧凑页头 + 顶部横向吸附导航 ----------
 @media (max-width: $bp-tablet) {
   .profile {
-    display: grid; grid-template-columns: 64px 1fr; gap: 0 16px; align-items: center;
+    display: grid; grid-template-columns: 72px 1fr; gap: 0 16px; align-items: center;
     padding: 32px 28px 0 0;   // 右侧给拉绳留位置
   }
-  .avatar { width: 64px; height: 64px; grid-row: span 2; }
-  .name { margin: 0; font-size: 1.3rem; }
+  .avatar { width: 72px; height: 72px; grid-row: span 2; }
+  .name { margin: 0; font-size: 1.4rem; }
   .role { font-size: 0.88rem; }
   .contact { grid-column: 1 / -1; margin-top: 14px; }
   .links a { display: inline-block; padding: 6px 0; }
@@ -60,5 +60,5 @@
   .toc ol { display: flex; gap: 22px; }
   .toc ol::before, .toc a::before { display: none; }
   .toc a { padding: 12px 0 10px; white-space: nowrap; border-bottom: 2px solid transparent; }
-  .toc a[aria-current="true"] { border-bottom-color: var(--heading); }
+  .toc a[aria-current="true"] { border-bottom-color: var(--accent); }
 }

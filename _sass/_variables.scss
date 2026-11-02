@@ -8,16 +8,19 @@ $bp-phone:  560px;   // 以下：论文配图移到文字上方
 
 :root {
   --bg:       #ffffff;
-  --ink:      #1b1d21;   // 正文
-  --muted:    #5e636d;   // 次要文字：作者、日期、会议名
-  --faint:    #8d929b;   // 更弱：未选中的导航与筛选
-  --line:     #e6e7ea;   // 分隔线
-  --accent:   #1f4fb8;   // 链接
-  --heading:  #043361;   // 标题、当前导航项、会议简称
-  --note:     #b23a22;   // 奖项
-  --code-bg:  #f7f7f8;
+  --ink:      #1c2430;   // 正文、标题
+  --muted:    #5b6573;   // 次要文字：作者、日期、会议名
+  --faint:    #8b94a1;   // 更弱：未选中的导航与筛选
+  --line:     #e3e7ec;   // 分隔线
 
-  --font: "Source Serif 4", Georgia, "Songti SC", serif;
-  --fs: 17px;
+  --accent:      #1f5fbf;   // 唯一强调色：链接、论文标题、当前导航、会议简称
+  --accent-ink:  #174a96;   // 强调色悬停态
+  --tint:        #eff5fc;   // 代表作底块
+  --note:        #b23a22;   // 奖项
+  --code-bg:     #f5f7fa;
+
+  --font-display: "Source Serif 4", Georgia, "Songti SC", serif;   // 姓名、章节标题
+  --font-body:    "Source Sans 3", -apple-system, "Segoe UI", "PingFang SC", sans-serif;
+  --fs: 16.5px;
   --lh: 1.65;
 }

@@ -1,59 +1,71 @@
 // =============================================================
 // Publications
+// 代表作（highlight: true）放在浅蓝底块中。列表向左右各外扩 $pub-pad，
+// 每条再留同样的内边距：文字与其他章节对齐，底块则向外伸出一点。
 // =============================================================
 
+$pub-pad: 20px;
+
 // ---------- 主题筛选 ----------
-.filters { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.92rem; margin-bottom: 24px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.95rem; margin: 0 0 12px; }
 .filter {
   font: inherit; background: none; border: 0; padding: 2px 0; cursor: pointer;
   color: var(--faint); border-bottom: 1px solid transparent;
   &:hover { color: var(--ink); }
-  &[aria-pressed="true"] { color: var(--heading); border-bottom-color: var(--heading); }
+  &[aria-pressed="true"] { color: var(--accent); border-bottom-color: var(--accent); }
 }
 
 // ---------- 条目：配图 | 文字 ----------
-.pubs { list-style: none; padding: 0; margin: 0; }
+.pubs { list-style: none; padding: 0; margin: 0 (-$pub-pad); display: grid; gap: 8px; }
 .pub {
-  display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 22px; padding: 18px 0;
-  &:first-child { padding-top: 0; }
+  display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; align-items: center;
+  padding: 22px $pub-pad;
   &[hidden] { display: none; }
   &.no-img { grid-template-columns: minmax(0, 1fr); }   // 无配图：通栏
+  &.highlight { background: var(--tint); }              // 代表作：浅蓝底块，直角
 }
 
 .thumb { position: relative; aspect-ratio: 16 / 10; }
 .thumb img {
-  position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover;
-  border: 1px solid var(--line); background: #fff; cursor: zoom-in;
-  transform-origin: left top;
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: contain;
+  background: #fff; cursor: zoom-in;
+  transform-origin: left center;
   transition: transform .22s ease .12s, box-shadow .22s ease .12s;
 }
-// 悬停放大 4 倍（约 640px 宽），浮在文字之上；点击可全屏查看
+.pub:not(.highlight) .thumb img { border: 1px solid var(--line); }
+// 悬停放大约 3 倍，浮在文字之上；点击可全屏查看
 @media (hover: hover) {
-  .thumb:hover img { transform: scale(4); z-index: 5; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18); }
+  .thumb:hover img { transform: scale(3.2); z-index: 5; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18); }
 }
 @media (prefers-reduced-motion: reduce) { .thumb img { transition: none; } }
 
-// 标题上方：会议简称 + 奖项
-.pub-meta { margin: 0 0 2px; font-size: 0.85rem; line-height: 1.4; color: var(--muted); }
-.venue-abbr { color: var(--heading); font-weight: 600; letter-spacing: 0.01em; }
+// ---------- 文字 ----------
+.pub-meta { margin: 0 0 4px; font-size: 0.82rem; line-height: 1.4; color: var(--muted); letter-spacing: 0.02em; }
+.venue-abbr { color: var(--ink); font-weight: 600; }
 .award { color: var(--note); }
 
 .pub-title {
-  font-size: 1rem; line-height: 1.4; margin-bottom: 4px;
-  a { color: var(--ink); }
-  a:hover { color: var(--accent); }
+  font-size: 1.1rem; font-weight: 600; line-height: 1.4; margin-bottom: 6px;
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-ink); }
 }
-.authors, .venue { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+.authors, .venue { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
 .authors .me { color: var(--ink); font-weight: 600; }
+.summary { margin: 8px 0 0; font-size: 0.97rem; line-height: 1.55; }
 
-.pub-links { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; font-size: 0.9rem; }
+.pub-links {
+  display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: 0.93rem;
+  a, .text-btn { display: inline-flex; align-items: center; gap: 5px; color: var(--accent); }
+  .icon { width: 15px; height: 15px; flex: none; }
+}
 .bib-btn.done { color: var(--muted); text-decoration: none; }
 .bib { display: none; }   // BibTeX 原文只作为复制来源
 
 @media (max-width: $bp-phone) {
-  .pub { grid-template-columns: 1fr; gap: 12px; }
+  .pubs { margin: 0 -16px; }
+  .pub { grid-template-columns: 1fr; gap: 14px; padding: 18px 16px; }
   // 触屏点击区域加高到约 36px
-  .pub-links { gap: 0 20px; margin-top: 2px; }
+  .pub-links { gap: 0 20px; margin-top: 4px; }
   .pub-links a, .pub-links button { padding: 7px 0; }
   .filter { padding: 8px 0; }
 }

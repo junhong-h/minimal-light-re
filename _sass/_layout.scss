@@ -1,5 +1,5 @@
 // =============================================================
-// 页面骨架：左侧吸附侧栏 | 细线 | 右侧正文
+// 页面骨架：左侧吸附侧栏 + 右侧正文（靠留白分栏，不用分隔线）
 // =============================================================
 
 .page {
@@ -9,26 +9,27 @@
 
 .side {
   position: sticky; top: 0; align-self: start; height: 100vh;
-  padding: 64px 36px 32px 0;
-  border-right: 1px solid var(--line);
+  padding: 72px 40px 32px 0;
   display: flex; flex-direction: column; gap: 36px;
 }
 
-main { padding: 64px 0 96px 56px; max-width: 780px; min-width: 0; }
+main { padding: 64px 0 96px 48px; max-width: 800px; min-width: 0; }
 
 // ---------- 章节 ----------
-section { position: relative; padding-top: 28px; margin-top: 44px; border-top: 1px solid var(--line); }
-section:first-child { padding-top: 0; margin-top: 0; border-top: 0; }
+// 章节之间靠留白区分，层次由大号衬线标题建立
+section { position: relative; margin-top: 48px; }
+section:first-child { margin-top: 0; }
 
 section > h2 {
   display: table;              // 宽度贴合文字，供下划线动画使用
   position: relative;
-  font-size: 1.25rem; margin-bottom: 18px; color: var(--heading);
+  font-family: var(--font-display); font-weight: 500; letter-spacing: -0.01em;
+  font-size: 25px; line-height: 1.25; margin-bottom: 16px; color: var(--ink);
 
   // 点击导航跳转后：标题下方短线从左向右划出，随后淡出
   &::after {
     content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
-    background: var(--heading); transform: scaleX(0); transform-origin: left; opacity: 0;
+    background: var(--accent); transform: scaleX(0); transform-origin: left; opacity: 0;
   }
   &[tabindex="-1"]:focus { outline: none; }
 }
@@ -42,6 +43,9 @@ section.flash > h2::after { animation: heading-cue 1.6s ease-out; }
 @media (prefers-reduced-motion: reduce) {
   section.flash > h2::after { animation: none; transform: scaleX(1); opacity: 1; }
 }
+
+// 章节标题下方的小字说明，例如 "* Equal contribution  † Corresponding author"
+.section-note { margin: -10px 0 16px; font-size: 0.85rem; color: var(--muted); }
 
 .interests { color: var(--muted); }
 .interests strong { color: var(--ink); font-weight: 500; }
@@ -57,5 +61,7 @@ footer.foot {
   // 拆开侧栏容器，让导航以整页为范围吸附在顶部（否则会随侧栏一起滚走）
   .side { display: contents; }
   main { padding: 32px 0 72px; }
+  section { margin-top: 40px; }
+  section > h2 { font-size: 22px; }
   html { scroll-padding-top: 56px; }
 }

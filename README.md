@@ -1,6 +1,6 @@
 # Personal Homepage
 
-基于 [Minimal Light](https://github.com/yaoyao-liu/minimal-light) 改造的个人学术主页：双栏布局、Source Serif 字体、跟随系统的深色模式（电脑端右上角拉绳可手动切换），使用 Jekyll 构建，部署在 GitHub Pages。
+基于 [Minimal Light](https://github.com/yaoyao-liu/minimal-light) 改造的个人学术主页：双栏布局、Source Serif 标题 + Source Sans 正文、单一蓝色强调色、跟随系统的深色模式（电脑端右上角拉绳可手动切换），使用 Jekyll 构建，部署在 GitHub Pages。
 
 ## 改内容：只需要动这些文件
 
@@ -33,6 +33,7 @@
 │   ├── sidebar.html            # 侧栏：个人信息 + 章节导航
 │   ├── footer.html             # 页脚：最后更新时间（自动取构建时间，链接到对应 commit）
 │   ├── theme-toggle.html       # 拉绳主题开关
+│   ├── icon.html               # 论文链接前的小图标（内联 SVG）
 │   └── sections/               # 各章节，文件名与 _config.yml 中 sections 的 id 对应
 │       ├── news.html
 │       ├── publications.html

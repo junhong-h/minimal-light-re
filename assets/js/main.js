@@ -176,13 +176,14 @@
   $$('.bib-btn').forEach(btn => btn.addEventListener('click', async () => {
     const ok = await copy($('.bib', btn.closest('.pub')).textContent);
     const msg = ok ? 'Copied' : 'Copy failed';
-    btn._label = btn._label || btn.textContent;
+    const label = $('span', btn) || btn;               // 只替换文字，保留图标
+    btn._label = btn._label || label.textContent;
     btn.style.minWidth = btn.offsetWidth + 'px';      // 避免文字变化导致后面的链接跳动
-    btn.textContent = msg; btn.classList.add('done');
+    label.textContent = msg; btn.classList.add('done');
     if (live) live.textContent = ok ? 'BibTeX copied to clipboard' : msg;
     clearTimeout(btn._t);
     btn._t = setTimeout(() => {
-      btn.textContent = btn._label; btn.classList.remove('done');
+      label.textContent = btn._label; btn.classList.remove('done');
       if (live) live.textContent = '';
     }, 1500);
   }));

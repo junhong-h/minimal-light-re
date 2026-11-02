@@ -8,7 +8,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 400 var(--fs)/var(--lh) var(--font);
+  font: 400 var(--fs)/var(--lh) var(--font-body);
   font-variant-numeric: tabular-nums;   // 日期等数字等宽对齐
   -webkit-font-smoothing: antialiased;
 }
@@ -18,7 +18,7 @@ p { margin: 0 0 1em; }
 h1, h2, h3 { margin: 0; font-weight: 600; line-height: 1.25; }
 
 a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 
 // 键盘焦点：只在键盘操作时显示
 :focus-visible { outline: 1.5px solid var(--accent); outline-offset: 3px; }
