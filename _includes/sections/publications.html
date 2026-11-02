@@ -1,0 +1,47 @@
+{%- assign s = include.section -%}
+{%- assign data = site.data.publications -%}
+{%- capture me %}<span class="me">{{ site.author_highlight }}</span>{% endcapture -%}
+<section id="{{ s.id }}" aria-labelledby="h-{{ s.id }}">
+  <h2 id="h-{{ s.id }}">{{ s.title }}</h2>
+
+  {%- if data.topics.size > 0 %}
+  <div class="filters" role="group" aria-label="Filter publications by topic">
+    <button type="button" class="filter" data-topic="" aria-pressed="true">All</button>
+    {%- for topic in data.topics %}
+    <button type="button" class="filter" data-topic="{{ topic }}" aria-pressed="false">{{ topic }}</button>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  <ol class="pubs">
+    {%- for pub in data.papers %}
+    {%- assign title_url = pub.url | default: pub.links.first.url %}
+    <li class="pub{% unless pub.image %} no-img{% endunless %}" data-topics="{{ pub.topics | join: '|' }}">
+      {%- if pub.image %}
+      <div class="thumb"><img src="{{ pub.image | relative_url }}" alt="Figure from “{{ pub.title | strip_html | escape }}”" loading="lazy"></div>
+      {%- endif %}
+      <div>
+        {%- if pub.venue_short %}
+        <p class="pub-meta"><span class="venue-abbr">{{ pub.venue_short }}</span>{% if pub.award %} · <span class="award">{{ pub.award }}</span>{% endif %}</p>
+        {%- endif %}
+        <h3 class="pub-title">{% if title_url %}<a href="{{ title_url }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</h3>
+        <p class="authors">{{ pub.authors | replace: site.author_highlight, me }}</p>
+        {%- if pub.venue %}
+        <p class="venue"><em>{{ pub.venue }}</em></p>
+        {%- endif %}
+        <div class="pub-links">
+          {%- for link in pub.links %}
+          <a href="{{ link.url }}">{{ link.name }}</a>
+          {%- endfor %}
+          {%- if pub.bibtex %}
+          <button class="text-btn bib-btn" type="button" title="Copy BibTeX">BibTeX</button>
+          {%- endif %}
+        </div>
+        {%- if pub.bibtex %}
+        <pre class="bib" hidden>{{ pub.bibtex | strip | escape }}</pre>
+        {%- endif %}
+      </div>
+    </li>
+    {%- endfor %}
+  </ol>
+</section>

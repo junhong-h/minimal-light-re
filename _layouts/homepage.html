@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'en-US' }}">
+<html lang="{{ site.lang | default: 'en' }}">
   {% include head.html %}
   <body>
-    <div class="wrapper">
-      {% include profile.html %}
+    <a class="skip" href="#main">Skip to content</a>
+    <span class="sr-only" id="live" aria-live="polite"></span>
 
-      <main class="content">
-        {{ content }}
+    <div class="page">
+      {% include sidebar.html %}
 
-        {%- if site.enable_footnote %}
-        <p class="footnote"><small>Powered by Jekyll and <a href="https://github.com/yaoyao-liu/minimal-light" target="_blank" rel="noopener">Minimal Light</a> theme.</small></p>
-        {%- endif %}
+      <main id="main">
+        <section id="about" aria-labelledby="h-about">
+          <h2 id="h-about">{{ site.about_title | default: "About me" }}</h2>
+          {{ content }}
+        </section>
+
+        {%- for section in site.sections %}
+        {% capture section_include %}sections/{{ section.id }}.html{% endcapture %}
+        {% include {{ section_include }} section=section %}
+        {%- endfor %}
+
+        {% include footer.html %}
       </main>
     </div>
+
+    {% if site.dark_mode %}{% include theme-toggle.html %}{% endif %}
+
+    <dialog class="lightbox" aria-label="Enlarged figure">
+      <img alt="">
+      <p>Tap or click anywhere to close</p>
+    </dialog>
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
   </body>
 </html>

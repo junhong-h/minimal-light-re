@@ -1,0 +1,10 @@
+{%- assign updated = site.time | date: '%b %-d, %Y' -%}
+{%- assign updated_iso = site.time | date: '%Y-%m-%d' -%}
+<footer class="foot">
+  Last updated
+  {%- if site.github.build_revision and site.github.repository_nwo %}
+  <a href="https://github.com/{{ site.github.repository_nwo }}/commit/{{ site.github.build_revision }}" title="View this commit on GitHub"><time datetime="{{ updated_iso }}">{{ updated }}</time></a>
+  {%- else %}
+  <time datetime="{{ updated_iso }}">{{ updated }}</time>
+  {%- endif %}
+</footer>

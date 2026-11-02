@@ -1,0 +1,18 @@
+// =============================================================
+// Beyond Research
+// =============================================================
+
+.beyond-list { margin: 0; display: grid; grid-template-columns: 110px 1fr; gap: 6px 16px; }
+.beyond-list dt { color: var(--muted); font-size: 0.92rem; padding-top: 2px; }
+.beyond-list dd { margin: 0; }
+
+.photos { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.photos figure { margin: 0; }
+.photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); cursor: zoom-in; }
+.photos figcaption { margin-top: 6px; font-size: 0.85rem; color: var(--faint); }
+
+@media (max-width: $bp-phone) {
+  .beyond-list { grid-template-columns: 1fr; gap: 0; }
+  .beyond-list dd { margin-bottom: 10px; }
+  .photos { grid-template-columns: 1fr 1fr; }
+}

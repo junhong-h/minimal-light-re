@@ -1,10 +1,14 @@
 // =============================================================
-// 学术服务列表（_includes/services.html）
+// Services
 // =============================================================
 
-.services {
-  h4 { margin: 0 10px; }
+.svc { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px; }
+.svc h3 { font-size: 0.92rem; margin-bottom: 6px; color: var(--heading); }
+.svc ul { list-style: none; margin: 0; padding: 0; color: var(--muted); font-size: 0.92rem; }
+.svc li { padding: 2px 0; }
+.svc a { color: inherit; }
+.svc a:hover { color: var(--accent); }
 
-  ul { margin: 0 0 5px; }
-  ul:last-child { margin-bottom: 20px; }
+@media (max-width: $bp-tablet) {
+  .svc { grid-template-columns: 1fr; }
 }

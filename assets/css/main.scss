@@ -1,27 +1,17 @@
 ---
-# 样式唯一入口。上方空的 front matter 让 Jekyll 编译此文件，
-# 并允许在这里使用 Liquid 读取 _config.yml 中的配置。
+# 样式唯一入口。空的 front matter 让 Jekyll 编译此文件，并允许使用 Liquid 读取 _config.yml。
 ---
-
-// ---------- 字体（由 _config.yml 中的 font 决定）----------
-{% if site.font == "Sans Serif" %}
-$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$font-size: 14px;
-$body-padding: 50px;
-{% else %}
-$font-family: "Crimson Pro", serif;
-$font-size: 16px;
-$body-padding: 0;
-{% endif %}
 
 @import "variables";
 @import "base";
 @import "layout";
-@import "profile";
+@import "sidebar";
+@import "news";
 @import "publications";
 @import "services";
+@import "beyond";
+@import "overlays";
 
-// ---------- 深色模式（由 _config.yml 中的 auto_dark_mode 决定）----------
-{% if site.auto_dark_mode %}
+{% if site.dark_mode %}
 @import "dark";
 {% endif %}

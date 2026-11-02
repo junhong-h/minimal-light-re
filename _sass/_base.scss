@@ -1,110 +1,40 @@
 // =============================================================
-// 基础排版：body、标题、段落、链接、代码、表格等
-// $font-family / $font-size / $body-padding 由 assets/css/main.scss 根据配置传入
+// 基础排版
 // =============================================================
+
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
   margin: 0;
-  padding: $body-padding;
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font: #{$font-size}/1.5 $font-family;
-  font-weight: 400;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 var(--fs)/var(--lh) var(--font);
+  font-variant-numeric: tabular-nums;   // 日期等数字等宽对齐
+  -webkit-font-smoothing: antialiased;
 }
 
-// ---------- 标题 ----------
-h1, h2, h3, h4, h5, h6 {
-  color: var(--color-heading);
-  margin: 0 0 20px;
+img { max-width: 100%; display: block; }
+p { margin: 0 0 1em; }
+h1, h2, h3 { margin: 0; font-weight: 600; line-height: 1.25; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
+// 键盘焦点：只在键盘操作时显示
+:focus-visible { outline: 1.5px solid var(--accent); outline-offset: 3px; }
+:focus:not(:focus-visible) { outline: none; }
+
+// 外观与链接一致的按钮
+.text-btn {
+  font: inherit; color: var(--accent);
+  background: none; border: 0; padding: 0; cursor: pointer;
+  &:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 }
 
-h1, h2, h3 { line-height: 1.1; }
-
-h1 {
-  font-size: 28px;
-  font-weight: 500;
-}
-
-h2 {
-  font-size: 157%;
-  font-weight: 500;
-  margin: 2px 0 15px;
-}
-
-h3, h4, h5, h6 { font-weight: 600; }
-
-// ---------- 文本 ----------
-p, ul, ol, table, pre, dl { margin: 0 0 20px; }
-
-strong {
-  color: var(--color-strong);
-  font-weight: 500;
-}
-
-small { font-size: 11px; }
-
-img { max-width: 100%; }
-
-hr {
-  border: 0;
-  background: var(--color-border);
-  height: 1px;
-  margin: 0 0 20px;
-}
-
-blockquote {
-  background: var(--color-bg);
-  border-left: 2px solid var(--color-theme);
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  font-size: 1.2rem;
-  font-style: italic;
-}
-
-// ---------- 链接 ----------
-a {
-  color: var(--color-link);
-  text-decoration: none;
-
-  &:hover { color: var(--color-link-hover); }
-}
-
-// 颜色与正文一致的链接（例如 Services 列表）
-a.link-plain,
-a.link-plain:hover {
-  color: var(--color-text);
-}
-
-// ---------- 代码 ----------
-code, pre {
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, Consolas, "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace;
-  color: var(--color-code);
-}
-
-pre {
-  max-width: 500px;
-  padding: 8px 15px;
-  background: var(--color-code-bg);
-  border-radius: 5px;
-  border: 1px solid var(--color-border);
-  overflow-x: auto;
-}
-
-// ---------- 表格 / 定义列表 ----------
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-th, td {
-  text-align: left;
-  padding: 5px 10px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-th { color: var(--color-label); }
-
-dt {
-  color: var(--color-label);
-  font-weight: 500;
+// 无障碍辅助
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip {
+  position: absolute; left: 12px; top: -48px; z-index: 100;
+  background: var(--ink); color: var(--bg); padding: 8px 12px;
+  &:focus { top: 12px; }
 }

@@ -1,0 +1,55 @@
+// =============================================================
+// 浮层组件：配图全屏查看、拉绳主题开关
+// =============================================================
+
+// ---------- 配图全屏查看 ----------
+dialog.lightbox {
+  width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh;
+  padding: 0; border: 0; background: none; cursor: zoom-out;
+  display: none; place-items: center;
+  &[open] { display: grid; }
+  &::backdrop { background: rgba(0, 0, 0, 0.86); }
+  img { max-width: 94vw; max-height: 88vh; object-fit: contain; background: #fff; }
+  p { position: absolute; bottom: 16px; left: 0; right: 0; margin: 0; text-align: center; color: #ccc; font-size: 0.85rem; }
+}
+
+// ---------- 拉绳开关 ----------
+.lamp {
+  --rest: 56px;     // 绳子静止长度；拖动时 JS 改写 --cord
+  position: fixed; top: 0; right: 40px; z-index: 40;
+  width: 32px; height: 112px; padding: 0; border: 0; background: none;
+  cursor: grab; touch-action: none;
+  &:active { cursor: grabbing; }
+  &:focus-visible { outline-offset: -2px; }
+
+  .cord {
+    position: absolute; top: 0; left: 50%; width: 1px; margin-left: -0.5px;
+    height: var(--cord, var(--rest)); background: var(--faint);
+    transition: height .5s cubic-bezier(.34, 1.56, .64, 1);   // 松手后带一点回弹
+  }
+  .knob {
+    position: absolute; left: 50%; top: var(--cord, var(--rest));
+    width: 10px; height: 10px; margin: -1px 0 0 -5px; border-radius: 50%;
+    background: var(--ink);
+    transition: top .5s cubic-bezier(.34, 1.56, .64, 1), transform .15s ease;
+  }
+  &:hover .knob { transform: scale(1.2); }
+  &.dragging .cord, &.dragging .knob { transition: none; }
+}
+@media (max-width: $bp-tablet) {
+  // 手机：缩短并挂在页头右上角，随页面滚走
+  .lamp { --rest: 36px; position: absolute; right: 12px; height: 84px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lamp .cord, .lamp .knob { transition: none; }
+}
+
+// 切换主题时颜色在 0.35s 内过渡（拉绳除外，保留其回弹）
+html.theme-anim body,
+html.theme-anim body *:not(.cord):not(.knob) {
+  transition: background-color .35s ease, color .35s ease, border-color .35s ease !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-anim body,
+  html.theme-anim body *:not(.cord):not(.knob) { transition: none !important; }
+}

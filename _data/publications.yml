@@ -1,22 +1,99 @@
-main:
+# 论文列表
+#
+# topics：筛选用的主题，按顺序显示在 "All" 后面；不需要筛选时留空 []。
+#
+# 每篇论文的字段：
+#   title        标题
+#   authors      作者，与 _config.yml 中 author_highlight 相同的名字会自动加粗
+#   venue_short  会议简称，显示在标题上方，例如 "CHI 2026"
+#   venue        完整会议 / 期刊名，斜体显示
+#   award        可选：奖项，红色显示在会议简称后面
+#   image        可选：配图（建议 16:10）；不填则该条论文通栏显示
+#   topics       可选：所属主题，需与上方 topics 中的写法一致
+#   url          可选：标题链接；不填则使用 links 中的第一个链接
+#   links        链接按钮，按顺序显示
+#   bibtex       可选：BibTeX 原文；填写后会出现 "BibTeX" 按钮，点击即复制
 
-  - title: Continual Learning for Abdominal Multi-Organ and Tumor Segmentation
-    authors: Yixiao Zhang, Xinyi Li, Huimiao Chen, Alan Yuille, <strong>Yaoyao Liu*</strong>, Zongwei Zhou* (*Corresponding authors)
-    conference_short: MICCAI
-    conference: International Conference on Medical Image Computing and Computer-Assisted Intervention <strong>(MICCAI)</strong>, 2023.
-    pdf: https://arxiv.org/pdf/2306.00988.pdf
-    code: https://github.com/MrGiovanni/ContinualLearning
-    bibtex: https://bib.yliu.me/MICCAI23.txt
+topics: [Human–AI, Visualization, Accessibility]
+
+papers:
+  - title: "Making Sense Together: How Analysts Collaborate with LLM Agents in Exploratory Data Work"
+    authors: Your Name, Coauthor One, Coauthor Two, Advisor Name
+    venue_short: CHI 2026
+    venue: Proceedings of the CHI Conference on Human Factors in Computing Systems
     image: /assets/img/teaser_example_2.png
-    notes: Early Accept
+    topics: [Human–AI]
+    links:
+      - { name: PDF, url: "#" }
+      - { name: Video, url: "#" }
+      - { name: Code, url: "#" }
+    bibtex: |
+      @inproceedings{name2026sense,
+        title     = {Making Sense Together},
+        author    = {Name, Your and One, Coauthor and Name, Advisor},
+        booktitle = {Proc. CHI},
+        year      = {2026}
+      }
 
-  - title: "Mnemonics Training: Multi-Class Incremental Learning without Forgetting"
-    authors: <strong>Yaoyao Liu</strong>, Yuting Su, An-An Liu, Bernt Schiele, Qianru Sun
-    conference_short: CVPR
-    conference: IEEE/CVF Conference on Computer Vision and Pattern Recognition <strong>(CVPR)</strong>, 2020.
-    pdf: https://arxiv.org/pdf/2002.10211.pdf
-    code: https://github.com/yaoyao-liu/class-incremental-learning/tree/main/mnemonics-training
-    page: https://class-il.mpi-inf.mpg.de/mnemonics/
-    bibtex: https://class-il.mpi-inf.mpg.de/mnemonics/
-    notes: Oral Presentation
+  - title: "Sketch2Chart: Turning Rough Sketches into Editable Visualizations"
+    authors: Coauthor One, Your Name, Advisor Name
+    venue_short: UIST 2025
+    venue: ACM Symposium on User Interface Software and Technology
+    award: Best Paper Honorable Mention
     image: /assets/img/teaser_example.png
+    topics: [Visualization]
+    links:
+      - { name: PDF, url: "#" }
+      - { name: Project, url: "#" }
+    bibtex: |
+      @inproceedings{one2025sketch,
+        title     = {Sketch2Chart},
+        author    = {One, Coauthor and Name, Your and Name, Advisor},
+        booktitle = {Proc. UIST},
+        year      = {2025}
+      }
+
+  - title: "Hearing the Shape of Data: Sonified Charts for Blind and Low-Vision Readers"
+    authors: Your Name, Coauthor Three
+    venue_short: ASSETS 2025
+    venue: ACM SIGACCESS Conference on Computers and Accessibility
+    topics: [Accessibility]
+    links:
+      - { name: PDF, url: "#" }
+    bibtex: |
+      @inproceedings{name2025hearing,
+        title     = {Hearing the Shape of Data},
+        author    = {Name, Your and Three, Coauthor},
+        booktitle = {Proc. ASSETS},
+        year      = {2025}
+      }
+
+  - title: "When to Ask: Timing Clarification Questions in Mixed-Initiative Writing Tools"
+    authors: Coauthor Two, Your Name, Coauthor Four
+    venue_short: CSCW 2025
+    venue: Proc. ACM on Human-Computer Interaction
+    topics: [Human–AI]
+    links:
+      - { name: PDF, url: "#" }
+    bibtex: |
+      @article{two2025ask,
+        title   = {When to Ask},
+        author  = {Two, Coauthor and Name, Your and Four, Coauthor},
+        journal = {Proc. ACM Hum.-Comput. Interact.},
+        year    = {2025}
+      }
+
+  - title: A Design Space of Annotations for Narrative Visualization
+    authors: Your Name, Coauthor One
+    venue_short: VIS 2024
+    venue: IEEE VIS Short Papers
+    topics: [Visualization]
+    links:
+      - { name: PDF, url: "#" }
+    bibtex: |
+      @inproceedings{name2024annot,
+        title     = {A Design Space of Annotations},
+        author    = {Name, Your and One, Coauthor},
+        booktitle = {IEEE VIS},
+        year      = {2024}
+      }

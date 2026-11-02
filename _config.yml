@@ -1,40 +1,64 @@
 # =============================================================
 # 站点配置
 # 修改本文件后，本地需要重启 `bundle exec jekyll serve` 才会生效。
+# 页面上显示的文字一律使用英文。
 # =============================================================
 
 # ---------- 基本信息 ----------
 title: Your Name
-position: Ph.D. Student
+position: Ph.D. Student in HCI
 affiliation: Your Affiliation
-affiliation_link:            # 可选：单位主页链接
-email: yourname (at) example.edu
+affiliation_link:                 # 可选：单位主页链接
+email: yourname@example.edu
+avatar: /assets/img/avatar.png    # 方形头像，建议至少 240×240
 
-# ---------- 站点地址 ----------
+# 论文作者列表中需要加粗的名字（与 _data/publications.yml 中的写法一致）
+author_highlight: Your Name
+
+# 侧栏链接，按顺序显示；不需要的直接删除
+links:
+  - name: Scholar
+    url: https://scholar.google.com/
+  - name: GitHub
+    url: https://github.com/
+  - name: LinkedIn
+    url: https://www.linkedin.com/
+  - name: X
+    url: https://x.com/
+  - name: CV
+    url: /assets/files/curriculum_vitae.pdf
+
+# ---------- 页面章节 ----------
+# 第一节固定为 About（内容写在 index.md），下面是其后的章节，按顺序显示，
+# 删除某一项即可隐藏该章节。每一项对应 _includes/sections/<id>.html。
+about_title: About me
+sections:
+  - id: news
+    title: News
+  - id: publications
+    title: Publications
+  - id: services
+    title: Services
+  - id: beyond
+    title: Beyond Research
+
+news_show: 4        # News 默认显示的条数，其余折叠在 "Show all" 里
+
+# ---------- 外观 ----------
+dark_mode: true     # 启用深色模式：跟随系统，电脑端右上角有拉绳开关可手动切换
+
+# ---------- 站点地址与 SEO ----------
 # 部署到 https://<username>.github.io 时，url 填该地址，baseurl 留空
 url: https://junhong-h.github.io
 baseurl: ""
-
-# ---------- SEO ----------
-keywords: minimal light
-description: The Minimal Light is a simple and elegant jekyll theme for academic personal homepage.
-
-# ---------- 社交链接（不需要的项直接删除）----------
-google_scholar: https://scholar.google.com/
-cv_link: /assets/files/curriculum_vitae.pdf
-github_link: https://github.com/
-linkedin: https://www.linkedin.com/
-twitter: https://twitter.com/
-
-# ---------- 图片 ----------
-avatar: /assets/img/avatar.png
+lang: en
+description: Personal academic homepage.
+keywords: HCI, human-computer interaction
 favicon: /assets/img/favicon.png            # 浅色模式
 favicon_dark: /assets/img/favicon-dark.png  # 深色模式
 
-# ---------- 外观 ----------
-font: "Serif"           # "Serif" 或 "Sans Serif"
-auto_dark_mode: true    # 跟随系统自动切换深色模式
-enable_footnote: true   # 页脚 "Powered by Jekyll and Minimal Light theme."
+# 页脚 "Last updated" 日期按此时区计算（GitHub 构建服务器使用 UTC）
+timezone: Asia/Singapore
 
 # ---------- 统计（可选）----------
 # Google Analytics 4 的测量 ID，形如 G-XXXXXXXXXX；不用则保持注释

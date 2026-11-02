@@ -1,0 +1,36 @@
+<aside class="side">
+  <div class="profile">
+    {%- if site.avatar %}
+    <img class="avatar" src="{{ site.avatar | relative_url }}" alt="Photo of {{ site.title }}">
+    {%- endif %}
+    <h1 class="name">{{ site.title }}</h1>
+    <p class="role">
+      {{- site.position -}}
+      {%- if site.affiliation %}<br>
+        {%- if site.affiliation_link %}<a href="{{ site.affiliation_link }}">{{ site.affiliation }}</a>
+        {%- else %}{{ site.affiliation }}{% endif -%}
+      {%- endif -%}
+    </p>
+    <div class="contact">
+      {%- if site.email %}
+      <a class="email" href="mailto:{{ site.email }}">{{ site.email }}</a>
+      {%- endif %}
+      {%- if site.links %}
+      <ul class="links">
+        {%- for link in site.links %}
+        <li><a href="{{ link.url | relative_url }}">{{ link.name }}</a></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </div>
+  </div>
+
+  <nav class="toc" aria-label="Sections">
+    <ol>
+      <li><a href="#about">{{ site.about_title | default: "About me" }}</a></li>
+      {%- for section in site.sections %}
+      <li><a href="#{{ section.id }}">{{ section.title }}</a></li>
+      {%- endfor %}
+    </ol>
+  </nav>
+</aside>

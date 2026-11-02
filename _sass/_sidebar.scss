@@ -1,0 +1,64 @@
+// =============================================================
+// 侧栏：个人信息 + 章节导航（竖线 + 圆点）
+// =============================================================
+
+.avatar { width: 112px; height: 112px; object-fit: cover; background: var(--code-bg); }
+.name { color: var(--heading); font-size: 1.45rem; letter-spacing: -0.01em; margin: 18px 0 6px; }
+.role {
+  margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.55;
+  a { color: inherit; }
+  a:hover { color: var(--ink); }
+}
+
+.contact { margin-top: 16px; font-size: 0.92rem; }
+.email { color: var(--ink); }
+.email:hover { color: var(--accent); }
+.links { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 2px 12px; }
+
+// ---------- 章节导航 ----------
+.toc ol { list-style: none; margin: 0; padding: 0; font-size: 0.92rem; position: relative; }
+.toc ol::before {           // 贯穿的竖线
+  content: ""; position: absolute; left: 4px; top: 17px; bottom: 17px; width: 1px; background: var(--line);
+}
+.toc a {
+  position: relative; display: block; padding: 6px 0 6px 22px; color: var(--faint);
+  &::before {               // 圆点
+    content: ""; position: absolute; left: 0; top: 50%; width: 9px; height: 9px; margin-top: -4.5px;
+    border-radius: 50%; background: var(--bg); border: 1px solid var(--faint);
+    transition: background .2s, border-color .2s, transform .2s;
+  }
+  &:hover { color: var(--ink); text-decoration: none; }
+  &:hover::before { border-color: var(--heading); }
+  &[aria-current="true"] { color: var(--heading); }
+  &[aria-current="true"]::before { background: var(--heading); border-color: var(--heading); transform: scale(1.15); }
+}
+
+// ---------- 平板及手机：紧凑页头 + 顶部横向吸附导航 ----------
+@media (max-width: $bp-tablet) {
+  .profile {
+    display: grid; grid-template-columns: 64px 1fr; gap: 0 16px; align-items: center;
+    padding: 32px 28px 0 0;   // 右侧给拉绳留位置
+  }
+  .avatar { width: 64px; height: 64px; grid-row: span 2; }
+  .name { margin: 0; font-size: 1.3rem; }
+  .role { font-size: 0.88rem; }
+  .contact { grid-column: 1 / -1; margin-top: 14px; }
+  .links a { display: inline-block; padding: 6px 0; }
+
+  .toc {
+    position: sticky; top: 0; z-index: 10;
+    margin: 20px -20px 0; padding: 0 20px;
+    background: var(--bg); border-bottom: 1px solid var(--line);
+    overflow-x: auto; scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+  }
+  // 右侧还有未显示的章节时，渐隐提示可以横向滑动
+  .toc.more-right {
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent);
+            mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent);
+  }
+  .toc ol { display: flex; gap: 22px; }
+  .toc ol::before, .toc a::before { display: none; }
+  .toc a { padding: 12px 0 10px; white-space: nowrap; border-bottom: 2px solid transparent; }
+  .toc a[aria-current="true"] { border-bottom-color: var(--heading); }
+}

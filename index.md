@@ -2,22 +2,11 @@
 layout: homepage
 ---
 
-## About Me
+{% comment %}About me 的正文。支持 Markdown；标题 "About me" 由 _config.yml 的 about_title 控制。{% endcomment %}
 
-I am a Ph.D. student at ...
+I am a Ph.D. student at Your Affiliation, advised by Prof. Advisor Name. I study how people make sense of complex information, and design interactive systems that help them reason, explore, and collaborate.
 
-## Research Interests
+My work combines formative studies, system building, and controlled evaluations. Previously, I was a research intern at Example Lab.
 
-- **Computer Vision:** image recognition, image generation, video captioning
-- **Machine Learning:** meta-learning, incremental learning, transfer learning
-
-## News
-
-- **[Feb. 2020]** Our paper about incremental learning is accepted to CVPR 2020.
-- **[Feb. 2020]** We will host the ACM Multimedia Asia 2020 conference in Singapore!
-- **[Sept. 2019]** Our paper about few-shot learning is accepted to NeurIPS 2019.
-- **[Mar. 2019]** Our paper about few-shot learning is accepted to CVPR 2019.
-
-{% include publications.html %}
-
-{% include services.html %}
+**Interests:** human–AI interaction, visualization, creativity support, accessibility.
+{: .interests}

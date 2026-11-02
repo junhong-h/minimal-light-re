@@ -1,0 +1,19 @@
+# Beyond Research：研究之外的你。
+# 建议每项只写一句，具体胜过抽象；最后一项可以邀请别人以此为话题联系你。
+
+intro: When I'm not in the lab, you'll probably find me somewhere with a camera.
+
+items:
+  - label: Photography
+    text: Mostly 35mm film and street scenes.
+  - label: Running
+    text: Training for my first half marathon, slowly.
+  - label: Reading
+    text: Currently <em>The Design of Everyday Things</em>, for the third time.
+  - label: Say hi
+    text: Happy to chat about research, grad school, or film cameras — just email me.
+
+# 可选：照片（建议 4:3，放在 assets/img/ 下），最多显示一行三张，点击可放大
+photos: []
+#  - image: /assets/img/photo-kyoto.jpg
+#    caption: Kyoto, 2025

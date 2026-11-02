@@ -1,32 +1,23 @@
 // =============================================================
-// 设计变量（Design tokens）
-// 所有颜色集中在这里，以 CSS 变量的形式定义。
-// 深色模式只需在 _dark.scss 中覆盖这些变量即可。
+// 设计变量
+// 颜色以 CSS 变量定义，深色模式在 _dark.scss 中覆盖同名变量。
 // =============================================================
 
+$bp-tablet: 840px;   // 以下：侧栏移到顶部，导航变为横向吸附
+$bp-phone:  560px;   // 以下：论文配图移到文字上方
+
 :root {
-  // 基础
-  --color-bg:            #fff;
-  --color-text:          #595959;
-  --color-strong:        #222;
-  --color-label:         #444;    // 表格表头 th、定义列表 dt
-  --color-border:        #e5e5e5;
+  --bg:       #ffffff;
+  --ink:      #1b1d21;   // 正文
+  --muted:    #5e636d;   // 次要文字：作者、日期、会议名
+  --faint:    #8d929b;   // 更弱：未选中的导航与筛选
+  --line:     #e6e7ea;   // 分隔线
+  --accent:   #1f4fb8;   // 链接
+  --heading:  #043361;   // 标题、当前导航项、会议简称
+  --note:     #b23a22;   // 奖项
+  --code-bg:  #f7f7f8;
 
-  // 标题与链接
-  --color-heading:       #043361;
-  --color-link:          #39c;
-  --color-link-hover:    #069;
-
-  // 侧边栏社交图标
-  --color-icon:          #043361;
-  --color-icon-hover-bg: #fff;
-
-  // 论文列表
-  --color-theme:         #002D72; // 会议徽章背景、按钮悬停色
-  --color-btn:           #000;    // PDF / Code 等按钮的文字与边框
-  --color-note:          #e74d3c; // "Oral" 等备注
-
-  // 代码块
-  --color-code:          #333;
-  --color-code-bg:       #f8f8f8;
+  --font: "Source Serif 4", Georgia, "Songti SC", serif;
+  --fs: 17px;
+  --lh: 1.65;
 }

@@ -1,0 +1,10 @@
+{%- assign s = include.section -%}
+<section id="{{ s.id }}" aria-labelledby="h-{{ s.id }}">
+  <h2 id="h-{{ s.id }}">{{ s.title }}</h2>
+  <ol class="news" id="news-list" data-show="{{ site.news_show | default: 4 }}">
+    {%- for item in site.data.news %}
+    <li><time datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%b %-d, %Y' }}</time><span>{{ item.text }}</span></li>
+    {%- endfor %}
+  </ol>
+  <div class="more" hidden><button class="text-btn" type="button" id="news-toggle" aria-expanded="false" aria-controls="news-list"></button></div>
+</section>

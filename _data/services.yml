@@ -1,17 +1,13 @@
-# 学术服务。每个分组包含一个标题 category 和若干条目 items（name + url）。
+# 学术服务。每个分组有一个标题 category 和若干条目 items；
+# 条目的 url 可选，填写后条目变为链接。
 
-- category: Conference Reviewers
+- category: Reviewing
   items:
-    - name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) 2021-2023
-      url: http://cvpr2023.thecvf.com/
-    - name: IEEE/CVF International Conference on Computer Vision (ICCV) 2021
-      url: http://iccv2021.thecvf.com/
-    - name: European Conference on Computer Vision (ECCV) 2022
-      url: https://eccv2022.ecva.net/
+    - name: CHI 2025–2027
+    - name: UIST 2025
+    - name: IEEE VIS 2024–2025
 
-- category: Journal Reviewers
+- category: Teaching
   items:
-    - name: IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)
-      url: https://www.computer.org/csdl/journal/tp
-    - name: International Journal of Computer Vision (IJCV)
-      url: https://www.springer.com/journal/11263
+    - name: TA, Introduction to HCI (Fall 2025)
+    - name: TA, Information Visualization (Spring 2025)
