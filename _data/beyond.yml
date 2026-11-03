@@ -1,19 +1,34 @@
 # Beyond Research：研究之外的你。
-# 建议每项只写一句，具体胜过抽象；最后一项可以邀请别人以此为话题联系你。
+#
+# text    一段（或几段）想说的话，支持 Markdown，例如 **加粗**、[链接](https://...)。
+# photos  横向滚动的相册，按顺序显示；每张照片下配一行说明。
+#         image    照片路径，建议放在 assets/img/beyond/ 下；长边 1200px 左右即可
+#         caption  照片下方的一行小字，几个词或一句话
+#         alt      可选：给读屏软件的图片描述；不填则只读 caption，避免同一句话读两遍
+#
+# autoplay        相册是否自动缓慢循环滚动（悬停、滑动、聚焦时暂停，访问者也可点 Pause 停止）
+# autoplay_speed  自动滚动速度，单位 px/秒，建议 20–40
+#
+# 下面的 sample-*.jpg 是占位图，换成真实照片后可以删除。
 
-intro: When I'm not in the lab, you'll probably find me somewhere with a camera.
+text: |
+  When I'm not in the lab, you'll probably find me somewhere with a camera — mostly 35mm film and quiet street corners. I'm also slowly training for my first half marathon, and rereading *The Design of Everyday Things* for the third time.
 
-items:
-  - label: Photography
-    text: Mostly 35mm film and street scenes.
-  - label: Running
-    text: Training for my first half marathon, slowly.
-  - label: Reading
-    text: Currently <em>The Design of Everyday Things</em>, for the third time.
-  - label: Say hi
-    text: Happy to chat about research, grad school, or film cameras — just email me.
+  Happy to chat about research, grad school, or film cameras — just [email me](mailto:yourname@example.edu).
 
-# 可选：照片（建议 4:3，放在 assets/img/ 下），最多显示一行三张，点击可放大
-photos: []
-#  - image: /assets/img/photo-kyoto.jpg
-#    caption: Kyoto, 2025
+autoplay: true
+autoplay_speed: 30
+
+photos:
+  - image: /assets/img/beyond/sample-1.jpg
+    caption: Kyoto, spring 2025
+  - image: /assets/img/beyond/sample-2.jpg
+    caption: First roll of Portra 400
+  - image: /assets/img/beyond/sample-3.jpg
+    caption: Morning run by the river
+  - image: /assets/img/beyond/sample-4.jpg
+    caption: Lab hike
+  - image: /assets/img/beyond/sample-5.jpg
+    caption: CHI 2026, Barcelona
+  - image: /assets/img/beyond/sample-6.jpg
+    caption: Late night in the studio

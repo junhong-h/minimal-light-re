@@ -1,18 +1,61 @@
 // =============================================================
-// Beyond Research
+// Beyond Research：一段文字 + 横向滚动相册
 // =============================================================
 
-.beyond-list { margin: 0; display: grid; grid-template-columns: 110px 1fr; gap: 6px 16px; }
-.beyond-list dt { color: var(--muted); font-size: 0.92rem; padding-top: 2px; }
-.beyond-list dd { margin: 0; }
+.beyond-text p:last-child { margin-bottom: 0; }
 
-.photos { list-style: none; padding: 0; margin: 24px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.photos figure { margin: 0; }
-.photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid var(--line); cursor: zoom-in; }
-.photos figcaption { margin-top: 6px; font-size: 0.85rem; color: var(--faint); }
+$gallery-h: 220px;
 
-@media (max-width: $bp-phone) {
-  .beyond-list { grid-template-columns: 1fr; gap: 0; }
-  .beyond-list dd { margin-bottom: 10px; }
-  .photos { grid-template-columns: 1fr 1fr; }
+.gallery { margin-top: 24px; }
+
+.gallery-track {
+  list-style: none; margin: 0; padding: 0 0 10px;
+  display: flex; gap: 16px;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  scrollbar-width: thin; scrollbar-color: var(--line) transparent;
+  &:focus-visible { outline-offset: 6px; }
+
+  // 两侧还有照片时边缘渐隐，提示可以继续滑动
+  &.more-right { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent);
+                         mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent); }
+  &.more-left  { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 56px), transparent);
+                         mask-image: linear-gradient(to left, #000 calc(100% - 56px), transparent); }
+  &.more-left.more-right {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+            mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+  }
+
+  li { flex: none; scroll-snap-align: start; }
+  figure { margin: 0; display: flex; flex-direction: column; width: min-content; }   // 说明文字不超过照片宽度
+  img {
+    height: $gallery-h; width: auto; max-width: none; min-width: 120px;
+    object-fit: cover; background: var(--code-bg); cursor: zoom-in;
+  }
+  figcaption { margin-top: 8px; font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--muted); }
+}
+
+// 左右翻页按钮（电脑端）
+.gallery-nav {
+  display: flex; justify-content: flex-end; gap: 4px; margin-top: 4px;
+  .text-btn { font-size: var(--fs-title); line-height: 1; padding: 6px 10px; color: var(--ink); }
+  .text-btn:hover { color: var(--accent); text-decoration: none; }
+  .text-btn:disabled { color: var(--line); cursor: default; }
+  .gallery-pause { font-size: var(--fs-sm); margin-right: auto; color: var(--muted); }
+}
+@media (hover: none) { .gallery-nav [data-dir] { display: none; } }   // 触屏直接滑动，只保留 Pause
+
+// 自动循环时：关闭吸附（否则会和逐帧滚动互相拉扯），两侧始终渐隐
+.gallery.looping .gallery-track {
+  scroll-snap-type: none; scroll-behavior: auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+          mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) { .gallery-track { scroll-behavior: auto; } }
+
+@media (max-width: $bp-tablet) {
+  // 手机：相册延伸到屏幕两边
+  .gallery-track { margin: 0 -20px; padding: 0 20px 10px; scroll-padding: 0 20px; gap: 12px; }
+  .gallery-track img { height: 180px; }
 }

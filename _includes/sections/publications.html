@@ -25,13 +25,10 @@
       {%- endif %}
       <div class="pub-body">
         {%- if pub.venue_short %}
-        <p class="pub-meta"><span class="venue-abbr">{{ pub.venue_short }}</span>{% if pub.award %} · <span class="award">{{ pub.award }}</span>{% endif %}</p>
+        <p class="pub-meta"><span class="venue-abbr"{% if pub.venue %} title="{{ pub.venue | escape }}"{% endif %}>{{ pub.venue_short }}</span>{% if pub.award %} · <span class="award">{{ pub.award }}</span>{% endif %}</p>
         {%- endif %}
         <h3 class="pub-title">{% if title_url %}<a href="{{ title_url }}">{{ pub.title }}</a>{% else %}{{ pub.title }}{% endif %}</h3>
         <p class="authors">{{ pub.authors | replace: site.author_highlight, me }}</p>
-        {%- if pub.venue %}
-        <p class="venue"><em>{{ pub.venue }}</em></p>
-        {%- endif %}
         {%- if pub.summary %}
         <p class="summary">{{ pub.summary }}</p>
         {%- endif %}

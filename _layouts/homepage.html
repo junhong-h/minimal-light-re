@@ -25,9 +25,12 @@
 
     {% if site.dark_mode %}{% include theme-toggle.html %}{% endif %}
 
-    <dialog class="lightbox" aria-label="Enlarged figure">
-      <img alt="">
-      <p>Tap or click anywhere to close</p>
+    <dialog class="lightbox" aria-label="Enlarged image">
+      <figure>
+        <img alt="">
+        <figcaption class="lb-caption"></figcaption>
+      </figure>
+      <p class="lb-hint">Tap or click anywhere to close</p>
     </dialog>
 
     <script src="{{ '/assets/js/main.js' | relative_url }}"></script>

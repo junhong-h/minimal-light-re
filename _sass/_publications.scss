@@ -1,13 +1,13 @@
 // =============================================================
 // Publications
-// 代表作（highlight: true）放在浅蓝底块中。列表向左右各外扩 $pub-pad，
-// 每条再留同样的内边距：文字与其他章节对齐，底块则向外伸出一点。
+// 默认无底色，条目之间靠留白分隔；配图与文字左右并排，文字精简到与配图大致等高。
+// 代表作（highlight: true）放在浅蓝底块中，底块边缘与正文对齐，内部留 $pub-pad 内边距。
 // =============================================================
 
 $pub-pad: 20px;
 
 // ---------- 主题筛选 ----------
-.filters { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.95rem; margin: 0 0 12px; }
+.filters { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 12px; }
 .filter {
   font: inherit; background: none; border: 0; padding: 2px 0; cursor: pointer;
   color: var(--faint); border-bottom: 1px solid transparent;
@@ -16,13 +16,14 @@ $pub-pad: 20px;
 }
 
 // ---------- 条目：配图 | 文字 ----------
-.pubs { list-style: none; padding: 0; margin: 0 (-$pub-pad); display: grid; gap: 8px; }
+.pubs { list-style: none; padding: 0; margin: 0; }
 .pub {
-  display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 24px; align-items: center;
-  padding: 22px $pub-pad;
+  display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 28px; align-items: center;   // 配图与右侧文字整体垂直居中
+  padding: 16px 0;   // 无底块的两篇之间共 32px
   &[hidden] { display: none; }
   &.no-img { grid-template-columns: minmax(0, 1fr); }   // 无配图：通栏
-  &.highlight { background: var(--tint); }              // 代表作：浅蓝底块，直角
+  &.highlight { background: var(--tint); padding: 22px $pub-pad; }   // 代表作：浅蓝底块，直角
+  &.highlight + &.highlight { margin-top: 8px; }        // 相邻两个底块之间留缝
 }
 
 .thumb { position: relative; aspect-ratio: 16 / 10; }
@@ -33,37 +34,37 @@ $pub-pad: 20px;
   transition: transform .22s ease .12s, box-shadow .22s ease .12s;
 }
 .pub:not(.highlight) .thumb img { border: 1px solid var(--line); }
-// 悬停放大约 3 倍，浮在文字之上；点击可全屏查看
+// 悬停放大约 2.6 倍，浮在文字之上；点击可全屏查看
 @media (hover: hover) {
-  .thumb:hover img { transform: scale(3.2); z-index: 5; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18); }
+  .thumb:hover img { transform: scale(2.6); z-index: 5; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18); }
 }
 @media (prefers-reduced-motion: reduce) { .thumb img { transition: none; } }
 
 // ---------- 文字 ----------
-.pub-meta { margin: 0 0 4px; font-size: 0.82rem; line-height: 1.4; color: var(--muted); letter-spacing: 0.02em; }
+.pub-meta { margin: 0 0 4px; font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--muted); letter-spacing: 0.02em; }
 .venue-abbr { color: var(--ink); font-weight: 600; }
 .award { color: var(--note); }
 
 .pub-title {
-  font-size: 1.1rem; font-weight: 600; line-height: 1.4; margin-bottom: 6px;
+  font-size: var(--fs-title); font-weight: 600; line-height: var(--lh); margin-bottom: 6px;
   a { color: var(--accent); }
   a:hover { color: var(--accent-ink); }
 }
-.authors, .venue { margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+.authors { margin: 0; color: var(--muted); font-size: var(--fs-sm); line-height: var(--lh-sm); }
 .authors .me { color: var(--ink); font-weight: 600; }
-.summary { margin: 8px 0 0; font-size: 0.97rem; line-height: 1.55; }
+.summary { margin: 6px 0 0; font-size: var(--fs-sm); line-height: var(--lh-sm); }
 
 .pub-links {
-  display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: 0.93rem;
+  display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: var(--fs-sm);
   a, .text-btn { display: inline-flex; align-items: center; gap: 5px; color: var(--accent); }
-  .icon { width: 15px; height: 15px; flex: none; }
+  .icon { width: 14px; height: 14px; flex: none; }
 }
 .bib-btn.done { color: var(--muted); text-decoration: none; }
 .bib { display: none; }   // BibTeX 原文只作为复制来源
 
 @media (max-width: $bp-phone) {
-  .pubs { margin: 0 -16px; }
-  .pub { grid-template-columns: 1fr; gap: 14px; padding: 18px 16px; }
+  .pub { grid-template-columns: 1fr; gap: 14px; padding: 16px 0; }
+  .pub.highlight { padding: 18px 16px; }
   // 触屏点击区域加高到约 36px
   .pub-links { gap: 0 20px; margin-top: 4px; }
   .pub-links a, .pub-links button { padding: 7px 0; }

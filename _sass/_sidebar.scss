@@ -3,20 +3,20 @@
 // =============================================================
 
 .avatar { width: 192px; height: 192px; object-fit: cover; background: var(--code-bg); }
-.name { font-family: var(--font-display); font-weight: 600; color: var(--ink); font-size: 1.75rem; letter-spacing: -0.01em; line-height: 1.2; margin: 22px 0 8px; }
+.name { font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: var(--fs-name); line-height: var(--lh-tight); margin: 22px 0 8px; }
 .role {
-  margin: 0; color: var(--muted); font-size: 0.95rem; line-height: 1.55;
+  margin: 0; color: var(--muted);
   a { color: inherit; }
   a:hover { color: var(--ink); }
 }
 
-.contact { margin-top: 16px; font-size: 0.92rem; }
+.contact { margin-top: 16px; }
 .email { color: var(--ink); }
 .email:hover { color: var(--accent); }
 .links { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 2px 12px; }
 
 // ---------- 章节导航 ----------
-.toc ol { list-style: none; margin: 0; padding: 0; font-size: 0.92rem; position: relative; }
+.toc ol { list-style: none; margin: 0; padding: 0; position: relative; }
 .toc ol::before {           // 贯穿的竖线
   content: ""; position: absolute; left: 4px; top: 17px; bottom: 17px; width: 1px; background: var(--line);
 }
@@ -40,8 +40,7 @@
     padding: 32px 28px 0 0;   // 右侧给拉绳留位置
   }
   .avatar { width: 72px; height: 72px; grid-row: span 2; }
-  .name { margin: 0; font-size: 1.4rem; }
-  .role { font-size: 0.88rem; }
+  .name { margin: 0; }
   .contact { grid-column: 1 / -1; margin-top: 14px; }
   .links a { display: inline-block; padding: 6px 0; }
 

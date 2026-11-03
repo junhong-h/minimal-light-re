@@ -6,9 +6,9 @@
 #   title        标题
 #   authors      作者，与 _config.yml 中 author_highlight 相同的名字会自动加粗
 #   venue_short  会议简称，显示在标题上方，例如 "CHI 2026"
-#   venue        完整会议 / 期刊名，斜体显示
+#   venue        可选：完整会议 / 期刊名，鼠标悬停在会议简称上时显示
 #   award        可选：奖项，红色显示在会议简称后面
-#   highlight    可选：true 表示代表作，放在浅蓝底块中突出显示
+#   highlight    可选：true 表示代表作，放在浅蓝底块中突出显示（默认不加底块）
 #   summary      可选：一句话简介，说明这篇论文做了什么
 #   image        可选：配图（建议 16:10）；不填则该条论文通栏显示
 #   topics       可选：所属主题，需与上方 topics 中的写法一致
@@ -25,8 +25,8 @@ papers:
   - title: "Making Sense Together: How Analysts Collaborate with LLM Agents in Exploratory Data Work"
     authors: Your Name*, Coauthor One*, Coauthor Two, Advisor Name†
     venue_short: CHI 2026
-    venue: Proceedings of the CHI Conference on Human Factors in Computing Systems
     highlight: true
+    venue: Proceedings of the CHI Conference on Human Factors in Computing Systems
     summary: A mixed-methods study of how analysts delegate, verify, and repair work when exploring data together with LLM agents.
     image: /assets/img/teaser_example_2.png
     topics: [Human–AI]
@@ -47,7 +47,6 @@ papers:
     venue_short: UIST 2025
     venue: ACM Symposium on User Interface Software and Technology
     award: Best Paper Honorable Mention
-    highlight: true
     summary: A sketch-based system that turns hand-drawn charts into editable, data-bound visualizations.
     image: /assets/img/teaser_example.png
     topics: [Visualization]
