@@ -3,8 +3,8 @@
 // =============================================================
 
 .svc { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 40px; }
-.svc h3 { font-size: 0.95rem; margin-bottom: 6px; color: var(--ink); }
-.svc ul { list-style: none; margin: 0; padding: 0; color: var(--muted); font-size: 0.92rem; }
+.svc h3 { margin-bottom: 6px; color: var(--ink); }
+.svc ul { list-style: none; margin: 0; padding: 0; color: var(--muted); }
 .svc li { padding: 2px 0; }
 .svc a { color: inherit; }
 .svc a:hover { color: var(--accent); }

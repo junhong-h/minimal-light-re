@@ -4,7 +4,7 @@
 # photos  横向滚动的相册，按顺序显示；每张照片下配一行说明。
 #         image    照片路径，建议放在 assets/img/beyond/ 下；长边 1200px 左右即可
 #         caption  照片下方的一行小字，几个词或一句话
-#         alt      可选：给读屏软件的图片描述；不填则使用 caption
+#         alt      可选：给读屏软件的图片描述；不填则只读 caption，避免同一句话读两遍
 #
 # autoplay        相册是否自动缓慢循环滚动（悬停、滑动、聚焦时暂停，访问者也可点 Pause 停止）
 # autoplay_speed  自动滚动速度，单位 px/秒，建议 20–40

@@ -32,16 +32,16 @@ $gallery-h: 220px;
     height: $gallery-h; width: auto; max-width: none; min-width: 120px;
     object-fit: cover; background: var(--code-bg); cursor: zoom-in;
   }
-  figcaption { margin-top: 8px; font-size: 0.85rem; line-height: 1.4; color: var(--muted); }
+  figcaption { margin-top: 8px; font-size: var(--fs-sm); line-height: var(--lh-sm); color: var(--muted); }
 }
 
 // 左右翻页按钮（电脑端）
 .gallery-nav {
   display: flex; justify-content: flex-end; gap: 4px; margin-top: 4px;
-  .text-btn { font-size: 1.1rem; line-height: 1; padding: 6px 10px; color: var(--ink); }
+  .text-btn { font-size: var(--fs-title); line-height: 1; padding: 6px 10px; color: var(--ink); }
   .text-btn:hover { color: var(--accent); text-decoration: none; }
   .text-btn:disabled { color: var(--line); cursor: default; }
-  .gallery-pause { font-size: 0.85rem; margin-right: auto; color: var(--muted); }
+  .gallery-pause { font-size: var(--fs-sm); margin-right: auto; color: var(--muted); }
 }
 @media (hover: none) { .gallery-nav [data-dir] { display: none; } }   // 触屏直接滑动，只保留 Pause
 

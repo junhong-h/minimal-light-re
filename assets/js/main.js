@@ -158,9 +158,14 @@
       pubs.forEach(p => { p.hidden = !!topic && !p.dataset.topics.split('|').includes(topic); });
       filters.forEach(b => b.setAttribute('aria-pressed', b.dataset.topic === topic));
     };
+    const announce = () => {   // 告诉读屏用户筛选后的结果数量
+      const n = pubs.filter(p => !p.hidden).length;
+      if (live) live.textContent = `Showing ${n} publication${n === 1 ? "" : "s"}${topic ? " on " + topic : ""}`;
+    };
     filters.forEach(b => b.addEventListener('click', () => {
       topic = topic === b.dataset.topic ? '' : b.dataset.topic;
       render();
+      announce();
     }));
   }
 
@@ -242,7 +247,7 @@
         const c = li.cloneNode(true);
         c.classList.add('clone');
         c.setAttribute('aria-hidden', 'true');                 // 复制品对读屏和键盘隐藏
-        $$('img', c).forEach(img => { img.alt = ''; img.loading = 'eager'; });
+        $$('img', c).forEach(img => { img.alt = ''; img.loading = 'eager'; img.removeAttribute('tabindex'); img.removeAttribute('role'); img.removeAttribute('aria-label'); });
         track.appendChild(c);
       });
       looping = true;
@@ -296,11 +301,25 @@
     const big = $('img', lightbox);
     const caption = $('.lb-caption', lightbox);
     let group = [], index = 0;
+    // 配图和照片可用键盘打开：Tab 聚焦后按 Enter / 空格（复制品除外）
+    $$('.thumb img, .gallery-track li:not(.clone) img').forEach(img => {
+      const fc = img.closest('figure') && $('figcaption', img.closest('figure'));
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      const label = 'Enlarge: ' + (img.alt || (fc ? fc.textContent : 'image'));
+      img.setAttribute('aria-label', label);
+      if (!img.alt) img.alt = label;   // 空 alt 表示装饰图，不能同时作为按钮
+    });
+    document.addEventListener('keydown', e => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('.thumb img, .gallery-track img')) {
+        e.preventDefault(); e.target.click();
+      }
+    });
     const show = i => {
       index = (i + group.length) % group.length;
       const img = group[index];
       big.src = img.currentSrc || img.src;
-      big.alt = img.alt;
+      big.alt = img.alt.replace(/^Enlarge: /, '');
       const fc = img.closest('figure') && $('figcaption', img.closest('figure'));
       caption.textContent = fc ? fc.textContent : '';
     };

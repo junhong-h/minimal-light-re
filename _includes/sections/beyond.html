@@ -11,7 +11,7 @@
     <ul class="gallery-track" aria-label="Photo gallery" tabindex="0">
       {%- for photo in data.photos %}
       <li><figure>
-        <img src="{{ photo.image | relative_url }}" alt="{{ photo.alt | default: photo.caption | escape }}" loading="lazy">
+        <img src="{{ photo.image | relative_url }}" alt="{{ photo.alt | escape }}" loading="lazy">
         {%- if photo.caption %}<figcaption>{{ photo.caption }}</figcaption>{% endif %}
       </figure></li>
       {%- endfor %}
